@@ -2,6 +2,7 @@
 #
 # Exercise 1.27
 import os
+import sys
 script_dir = os.path.dirname(__file__)
 
 def portfolio_cost(filename):
@@ -12,8 +13,18 @@ def portfolio_cost(filename):
 
     for line in f:
         name, shares, price = line.rstrip().split(',')
-        total_cost = total_cost + int(shares) * float(price)
+        shares
+        try:
+            total_cost = total_cost + int(shares) * float(price)
+        except ValueError:
+            continue
+
     return total_cost
 
-cost = portfolio_cost('Data/portfolio.csv')
+if len(sys.argv) == 2:
+    filename = sys.argv[1]
+else:
+    filename = 'Data/portfolio.csv'
+
+cost = portfolio_cost(filename)
 print('Total cost:', cost)
